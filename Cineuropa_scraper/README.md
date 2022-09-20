@@ -1,7 +1,7 @@
 # Cineuropa Scraper
 
 
-Scrapes reviews and downloads them into a sqlite db and as .csv
+Scrapes reviews and downloads them into a sqlite db.
 
 ### Instructions
 
