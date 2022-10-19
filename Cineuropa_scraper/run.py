@@ -11,6 +11,9 @@ from colorama import Fore, Back, Style
 import signal
 import sys
 from halo import Halo
+from rotten_tomatoes_client import RottenTomatoesClient
+import argparse
+import os
 
 
 def signal_handler(sig, frame):
@@ -23,13 +26,22 @@ signal.signal(signal.SIGINT, signal_handler)
 
 language = 'en'
 history_date = '04/09/2002'
-base_url = f'https://www.cineuropa.org/'
+
 
 history_date = datetime.datetime.strptime(history_date, '%d/%m/%Y')
 
 
 def lovely_soup(url):
-    r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1'})
+    if 'rottentomatoes' in url:
+        headers = {
+            'Referer': 'https://www.rottentomatoes.com/m/notebook/reviews?type=user',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36',
+            'X-Requested-With': 'XMLHttpRequest',
+        }
+    else:
+        headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1'}
+
+    r = requests.get(url, headers=headers)
     return BeautifulSoup(r.content, 'lxml')
 
 
@@ -56,6 +68,8 @@ def db_connect():
                                         screendaily_review_author TEXT NULL,
                                         screendaily_review_text TEXT NULL,
                                         screendaily_review_date TEXT NULL,
+                                        rottentomatoes_tomatometer_score INTEGER NULL,
+                                        rottentomatoes_audience_score INTEGER NULL,
                                         UNIQUE(title) ON CONFLICT IGNORE
                                         );"""
         conn.execute(create_table)
@@ -105,6 +119,13 @@ def read_unfinished_screendaily_from_db(conn):
     return rows
 
 
+def read_unfinished_rottentomatoes_from_db(conn):
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM reviews WHERE rottentomatoes_tomatometer_score IS NULL")
+    rows = cur.fetchall()
+    return rows
+
+
 def insert_cineuropa_one(conn, url, title, cineuropa_review_author, cineuropa_review_date):
     conn.execute("INSERT INTO reviews (url, title, cineuropa_review_author, cineuropa_review_date) VALUES (?, ?, ?, ?);", (url, title, cineuropa_review_author, cineuropa_review_date))
     conn.commit()
@@ -134,13 +155,19 @@ def insert_screendaily_one(conn, screendaily_review_author, screendaily_review_d
     conn.commit()
 
 
+def insert_rottentomatoes_one(conn, rottentomatoes_tomatometer_score, rottentomatoes_audience_score, title):
+    conn.execute(f'UPDATE reviews SET rottentomatoes_tomatometer_score = ?, rottentomatoes_audience_score = ? WHERE title = ?',
+                 (rottentomatoes_tomatometer_score, rottentomatoes_audience_score, title))
+    conn.commit()
+
+
 def get_cineuropa_review_urls():
     with Halo(text='Gathering Cineuropa Urls', spinner='dots') as spinner:
         review_urls = []
         c = 0
 
         for i in range(9999):
-            url = f'{base_url}/{language}/freviews/p/{i+1}'
+            url = f'https://www.cineuropa.org/{language}/freviews/p/{i+1}'
             soup = lovely_soup(url)
             for article in soup.select('div.article.latest'):
                 title = article.select_one('p.news-info a span').text
@@ -153,7 +180,7 @@ def get_cineuropa_review_urls():
                 c += 1
                 spinner.text = f'Gathering Cineuropa Urls ({c})'
                 a = link['href']
-                url = f'{base_url}{a}'
+                url = f'https://www.cineuropa.org/{a}'
                 insert_cineuropa_one(conn, url, title, cineuropa_review_author, cineuropa_review_date)
 
 
@@ -405,13 +432,111 @@ def get_screendaily_review_data():
             print(Fore.RED + f'Screendaily - {title}')
 
 
+def get_rotten_tomatoes_data(title, year):
+    params = {
+        'searchQuery': f'{title} {year}',
+        'type': 'movie',
+        'f': 'null',
+    }
+    headers = {
+        'Referer': 'https://www.rottentomatoes.com/m/notebook/reviews?type=user',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+    }
+    try:
+        r = requests.get('https://www.rottentomatoes.com/napi/search/all', headers=headers, params=params).json()
+    except Exception as e:
+        print(e)
+        return False
+
+    for movie in r['movie']['items']:
+        tomatometer_score = 'NULL'
+        audience_score = 'NULL'
+
+        if unidecode.unidecode(title.lower()) in unidecode.unidecode(movie['name'].lower()):
+            if year and movie['releaseYear'] in [str(int(year) - 1), year, str(int(year) + 1)]:
+
+                if 'score' in movie['tomatometerScore']:
+                    tomatometer_score = movie['tomatometerScore']['score']
+                if 'score' in movie['audienceScore']:
+                    audience_score = movie['audienceScore']['score']
+
+        return {'ts': tomatometer_score, 'as': audience_score}
+
+
+def get_rotten_tomatoes_review_data():
+    rows = read_unfinished_rottentomatoes_from_db(conn)
+
+    for row in rows:
+        title = row[2]
+        year = row[5]
+        ts_var = None
+        as_var = None
+        score = get_rotten_tomatoes_data(title, year)
+        if score and 'ts' in score and 'as' in score:
+            if score['ts'] != 'NULL' or score['as'] != 'NULL':
+                ts_var =  score['ts']
+                as_var =  score['as']
+                print(Fore.GREEN + f'Rotten Tomatoes - {title}')
+        else:
+            print(Fore.RED + f'Rotten Tomatoes - {title}')
+
+        insert_rottentomatoes_one(conn, ts_var, as_var, title)
+
+
+def if_args():
+    no_args = True
+    for arg in vars(args):
+        if getattr(args, arg):
+            no_args = True
+            return no_args
+
+
 def main():
-    # read_db(conn)
-    # return
-    get_cineuropa_review_data()
-    get_screendaily_review_data()
-    get_variety_review_data()
-    get_hollywoodreporter_review_data()
+    parser = argparse.ArgumentParser(description='Movie Analysis Fandango v1.0 (by u/impshum)')
+    parser.add_argument(
+        '-ce', '--cineuropa', help='Scrape Cineuropa Only', action='store_true')
+    parser.add_argument(
+        '-sd', '--screendaily', help='Scrape Screendaily Only', action='store_true')
+    parser.add_argument(
+        '-v', '--variety', help='Scrape Variety Only', action='store_true')
+    parser.add_argument(
+        '-hr', '--hollywood', help='Scrape Hollywoodreporter Only', action='store_true')
+    parser.add_argument(
+        '-rt', '--rotten', help='Scrape Rotten Tomatoes Only', action='store_true')
+    parser.add_argument(
+        '-all', '--all', help='Scrape All (leave args empty for the same result)', action='store_true')
+    parser.add_argument(
+        '-dd', '--deletedb', help='Delete Database (start fresh)', action='store_true')
+
+    args = parser.parse_args()
+
+    if args.cineuropa:
+        print('learing Database')
+        os.remove('data.db')
+    elif args.cineuropa:
+        print('Scraping Cineuropa Only')
+        get_cineuropa_review_data()
+    elif args.screendaily:
+        print('Scraping Screendaily Only')
+        get_screendaily_review_data()
+    elif args.variety:
+        print('Scraping Variety Only')
+        get_variety_review_data()
+    elif args.hollywood:
+        print('Scraping Hollywoodreporter Only')
+        get_hollywoodreporter_review_data()
+    elif args.rotten:
+        print('Scraping Rotten Tomatoes Only')
+        get_rotten_tomatoes_review_data()
+    else:
+        print('Scraping All... Here we go again!')
+        get_cineuropa_review_data()
+        get_screendaily_review_data()
+        get_variety_review_data()
+        get_hollywoodreporter_review_data()
+        get_rotten_tomatoes_review_data()
+
     print(Style.RESET_ALL)
 
 
