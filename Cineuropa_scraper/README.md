@@ -1,7 +1,6 @@
 # Cineuropa Scraper
 
-
-Scrapes reviews and downloads them into a sqlite db.
+Scrapes reviews from Cineuropa, and checks Variety, Hollywood Reporter and Screen Daily for corresponding reviews. Then downloads them into a sqlite db.
 
 ### Instructions
 
