@@ -1,7 +1,3 @@
-## Movie Analysis Scraper Thing
-
-![](ss.jpg)
-
 ### Instructions
 
 -   Install requirements `pip install -r requirements.txt`
@@ -24,10 +20,4 @@
       -all, --all         Scrape All (leave args empty for the same result)
       -dd, --deletedb     Delete Database (start fresh)
 
-### Notes
 
-This script will not kill your cat. Nor will it create quakes (unsure actually).
-
-### Tip
-
-BTC - 1AYSiE7mhR9XshtS4mU2rRoAGxN8wSo4tK
