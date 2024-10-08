@@ -7,7 +7,7 @@ This paper looks at the impact of film criticism on predicting the commercial su
 
 ## Repository Structure
 
-### 1. [Data](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Data))
+### 1. [Data](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Data)
 - The **data** folder contains datasets used for the analysis.
   - `classification_2022report_24072024.xlsx`:
   - `master_2022report_24072024.xlsx.xlsx`:
