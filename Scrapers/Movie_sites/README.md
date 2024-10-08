@@ -8,8 +8,6 @@
 
     usage: run.py [-h] [-ce] [-sd] [-v] [-hr] [-rt] [-all] [-dd]
 
-    Movie Analysis Fandango v1.0 (by u/impshum)
-
     optional arguments:
       -h, --help          show this help message and exit
       -ce, --cineuropa    Scrape Cineuropa Only
