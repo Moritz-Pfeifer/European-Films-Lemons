@@ -8,22 +8,19 @@ This paper looks at the impact of film criticism on predicting the commercial su
 ## Repository Structure
 
 #### 1. [Data](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Data)
-- The **data** folder contains datasets used for the analysis.
+- This folder contains datasets used for the analysis.
   - `classification_2022report_24072024.xlsx`:
   - `master_2022report_24072024.xlsx.xlsx`:
   - `classification_24072024.xlsx.xlsx`:
   - `master0402024.xlsx.xlsx`:
 
 #### 2. [Scrapers](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Scrapers)
-- The **Scraper** folder contains the scripts for data retrieval. 
+- This folder contains the scripts for data retrieval. 
 
 #### 3. [Sentiment Analysis](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Scrapers)
-- The script for analyzing the sentiment of film reviews with [SiEBERT](https://huggingface.co/siebert/sentiment-roberta-large-english).
+- The script for analyzing the sentiment of film reviews with [SiEBERT](https://huggingface.co/siebert/sentiment-roberta-large-english) and the script for explaining the sentiment analysis with [Captum](https://github.com/pytorch/captum) and Layer Integrated Gradients](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Layer_Integrated_Gradients). 
 
-#### 4. [Layer Integrated Gradients](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Layer_Integrated_Gradients)
-- The script for explaining the sentiment analysis with [Captum](https://github.com/pytorch/captum). 
-
-#### 5. [Master_File.ipynb](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Master_File.ipynb) 
+#### 4. [Master_File.ipynb](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Master_File.ipynb) 
 - The jupyter notebook used for the economic analysis including the [XGBoost](https://github.com/dmlc/xgboost) model and [SHAP](https://github.com/shap/shap).  
    
 
