@@ -14,7 +14,7 @@ This paper looks at the impact of film criticism on predicting the commercial su
   - `classification_24072024.xlsx`: Admission thresholds for classifying commercial success
   - `master_2022report_24072024.xlsx`: Master file with market data according to the method of the EAO 2023 Report and sentiment scores for European films
   - `classification_2022report_24072024.xlsx`: Admission thresholds for classifying commercial success according to the method of the EAO 2023 Report
----
+--
   - `films_withimdb09092024.xlsx`: Market and Festival data for European films retreived from LUMIERE (lumiere.obs.coe.int) and IMDb (imdb.com)
   - `moviesOBS09092024.xlsx`: Market data for all European films with theatrical release retreived from LUMIERE (lumiere.obs.coe.int)
   - `ticketspercountry2021.xlsx`: Average movie theater ticket prices per country
