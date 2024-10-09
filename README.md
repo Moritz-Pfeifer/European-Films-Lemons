@@ -21,7 +21,7 @@ This paper looks at the impact of film criticism on predicting the commercial su
     
   - `moviesOBS09092024.xlsx`: Market data for all European films with theatrical release retreived from LUMIERE (lumiere.obs.coe.int)
     
-  - `ticketspercountry2021.xlsx`: Average ticket prices for European countries
+  - `ticketspercountry2021.xlsx`: Average cinema ticket prices per country
 
 #### 2. [Scrapers](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Scrapers)
 - This folder contains the scripts for data retrieval. 
