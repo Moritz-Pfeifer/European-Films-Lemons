@@ -24,7 +24,7 @@ This paper looks at the impact of film criticism on predicting the commercial su
   - `ticketspercountry2021.xlsx`: Average cinema ticket prices per country
 
 #### 2. [Scrapers](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Scrapers)
-- This folder contains the scripts for data retrieval. 
+- This folder contains the scripts for data retrieval. The jupyter notebook ([Scrape_and_Analyse_Market_Data.ipynb])(https://github.com/Moritz-Pfeifer/European-Films-Lemons/Scrapers/LUMIERE_and_IMDb_scraper) includes the code used to retreive data from LUMIERE and IMBb and structurate the market and festival data for classifying commercial success.
 
 #### 3. [Sentiment Analysis](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Scrapers)
 - The script for analyzing the sentiment of film reviews with [SiEBERT](https://huggingface.co/siebert/sentiment-roberta-large-english) and the script for explaining the sentiment analysis with [Captum](https://github.com/pytorch/captum) and [Layer Integrated Gradients](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Layer_Integrated_Gradients). 
