@@ -8,11 +8,17 @@ This paper looks at the impact of film criticism on predicting the commercial su
 ## Repository Structure
 
 #### 1. [Data](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Data)
-- This folder contains datasets used for the analysis.
-  - `classification_2022report_24072024.xlsx`:
-  - `master_2022report_24072024.xlsx.xlsx`:
-  - `classification_24072024.xlsx.xlsx`:
-  - `master0402024.xlsx.xlsx`:
+- This folder contains datasets used for the analysis. 
+  - `master0402024.xlsx.xlsx`: Master file containing market data and sentiment scores for European Films
+  - `master_2022report_24072024.xlsx.xlsx`: Master file containing market data according to the method of the EAO 2023 Report and sentiment scores for European Films
+  - `classification_24072024.xlsx.xlsx`: Admission thresholds to classify the films
+  - `classification_2022report_24072024.xlsx`: Admission thresholds to classify the films according to the method of the EAO 2023 Report
+     `moviesOBS09092024.xlsx`:
+  - `films_noimdb09092024.xlsx`:
+  - `films_withimdb09092024.xlsx`:
+  - `hicp.xlsx`:
+  - `inflation.xlsx`:
+  - `ticketspercountry2021.xlsx`:
 
 #### 2. [Scrapers](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Scrapers)
 - This folder contains the scripts for data retrieval. 
