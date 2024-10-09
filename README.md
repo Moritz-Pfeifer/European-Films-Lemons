@@ -9,17 +9,17 @@ This paper looks at the impact of film criticism on predicting the commercial su
 
 #### 1. [Data](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Data)
 - This folder contains datasets used for the analysis. 
-  - `master0402024.xlsx`: Master file containing market data and sentiment scores for European Films
+  - `master0402024.xlsx`: Master file with market data and sentiment scores for European Films
     
-  - `master_2022report_24072024.xlsx`: Master file containing market data according to the method of the EAO 2023 Report and sentiment scores for European Films
+  - `master_2022report_24072024.xlsx`: Master file with market data according to the method of the EAO 2023 Report and sentiment scores for European Films
     
   - `classification_24072024.xlsx`: Our admission thresholds for classifying commercial success
     
   - `classification_2022report_24072024.xlsx`: Admission thresholds for classifying commercial success according to the method of the EAO 2023 Report
     
-  - `moviesOBS09092024.xlsx`: Market data for all European films with theatrical release retreived from LUMIERE (lumiere.obs.coe.int)
-    
   - `films_withimdb09092024.xlsx`: Market and Festival data for European films retreived from LUMIERE (lumiere.obs.coe.int) and IMDb (imdb.com)
+    
+  - `moviesOBS09092024.xlsx`: Market data for all European films with theatrical release retreived from LUMIERE (lumiere.obs.coe.int)
     
   - `ticketspercountry2021.xlsx`: Average ticket prices for European countries
 
