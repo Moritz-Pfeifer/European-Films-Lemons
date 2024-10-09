@@ -9,7 +9,6 @@ This paper looks at the impact of film criticism on predicting the commercial su
 
 #### 1. [Data](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Data)
 - This folder contains datasets used for the analysis. 
-- This folder contains datasets used for the analysis. 
   - `master0402024.xlsx`: Master file with market data and sentiment scores for European films
   - `classification_24072024.xlsx`: Admission thresholds for classifying commercial success
   - `master_2022report_24072024.xlsx`: Master file with market data according to the method of the EAO 2023 Report and sentiment scores for European films
