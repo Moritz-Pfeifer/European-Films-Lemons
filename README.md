@@ -18,7 +18,7 @@ This paper looks at the impact of film criticism on predicting the commercial su
   - `ticketspercountry2021.xlsx`: Average movie theater ticket prices per country retreived from the 2022 report of the European Audiovisual Observatory.
 
 #### 2. [Scrapers](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Scrapers)
-- This folder contains the scripts for data retrieval. The jupyter notebook [Scrape_and_Analyse_Market_Data.ipynb](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Scrapers/LUMIERE_and_IMDb_scraper/Scrape_and_Analyse_Market_Data.ipynb) includes the script used to retreive data from LUMIERE and IMBb and structurate the market and festival data for further analysis, i.e. classifying commercial success.
+- This folder contains the scripts for data retrieval. The jupyter notebook [Scrape_and_Analyse_Market_Data.ipynb](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Scrapers/LUMIERE_and_IMDb_scraper/Scrape_and_Analyse_Market_Data.ipynb) includes the script we used to retreive data from LUMIERE and IMBb and to structurate them for further analysis, i.e. classifying commercial success.
 
 #### 3. [Sentiment Analysis](https://github.com/Moritz-Pfeifer/European-Films-Lemons/tree/main/Scrapers)
 - The script for analyzing the sentiment of film reviews with [SiEBERT](https://huggingface.co/siebert/sentiment-roberta-large-english) and the script for explaining the sentiment analysis with [Captum](https://github.com/pytorch/captum) and [Layer Integrated Gradients](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Layer_Integrated_Gradients). 
