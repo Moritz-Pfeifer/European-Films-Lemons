@@ -24,6 +24,6 @@ This paper looks at the impact of film criticism on predicting the commercial su
 - The script for analyzing the sentiment of film reviews with [SiEBERT](https://huggingface.co/siebert/sentiment-roberta-large-english) and the script for explaining the sentiment analysis with [Captum](https://github.com/pytorch/captum) and [Layer Integrated Gradients](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Layer_Integrated_Gradients). 
 
 #### 4. [Economic Analysis](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Master_File.ipynb) 
-- The jupyter notebook ([Master_File.ipynb](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Master_File.ipynb)) used for the economic analysis including the [XGBoost](https://github.com/dmlc/xgboost) model and [SHAP](https://github.com/shap/shap).  
+- The jupyter notebook [Master_File.ipynb](https://github.com/Moritz-Pfeifer/European-Films-Lemons/blob/main/Master_File.ipynb) used for the economic analysis including the [XGBoost](https://github.com/dmlc/xgboost) model and [SHAP](https://github.com/shap/shap).  
    
 
