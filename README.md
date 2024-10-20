@@ -1,7 +1,7 @@
 
-### The European Film Industry as a (Winner-Take-All) Market for Lemons
+### The European Film Industry as a Market for Lemons
 
-This repository contains the code and data for the paper "The European Film Industry as a (Winner-Take-All) Market for Lemons". 
+This repository contains the code and data for the paper "The European Film Industry as a Market for Lemons". 
 
 This paper looks at the impact of film criticism on predicting the commercial success of European films. We focus on the EU-funded film journal _Cineuropa_ and compare it against the three largest industry press outlets. Using sentiment analysis to evaluate film reviews and a binary classification algorithm to assess commercial success, we find that _Cineuropa_ has a positive bias. This bias leads the prediction model to overestimate the likelihood of commercial success of films regardless of their actual market performance. We interpret this as evidence that _Cineuropa_ functions more as an advertisement platform than as a source of film criticism, creating misleading signals independent of a film's artistic or commercial merit. This paper makes three contributions: (1) it presents the first predictive study on the European film industry as a whole, (2) it introduces a novel method for classifying commercial success with an emphasis on model explainability, and (3) it adds to empirical research on signaling and asymmetric information.
 
